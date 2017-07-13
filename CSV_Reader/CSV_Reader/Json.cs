@@ -12,7 +12,8 @@ namespace CSV_Reader
         override
         public string ToString()
         {
-            string results = "[\n\t{\n\t";
+            string tabs = "    "; //string holds four tabs for cleaner formatting
+            string results = "{\n  [\n    ";
             /*
             [
   {
@@ -29,15 +30,22 @@ namespace CSV_Reader
  
             */
             int wordcount = 0;
+            
             for (int key = 0; key < this.Keys.Length; key++)
             {
+                results += "\n" + tabs + "{";
                 //Want to iterate through target dictionary to allow for better JSON formatting
                 for(int value = 0; value < this.Values[key].Count; value++)
                 {
                     string val = this.Values[key][value];                    
-                    results += "\n" + "\tKey:" + this.Keys[key] + ": " + " Value: " + val;
+                    results += "\n" + tabs + tabs +"Key ->" + '"' + this.Keys[key].Trim() + '"' + ": " + " Value -> " + '"' + val.Trim() + '"';
+                    if (value < this.Values[key].Count - 1) { results += ","; }
                 }
+                results += "\n" +  tabs + "}";
+                if(key < this.Keys.Length - 1) { results += ","; }
             }
+
+            results += "\n    }\n  ]\n}";
             return results;
         }
     }
