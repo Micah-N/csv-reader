@@ -15,7 +15,7 @@ namespace CSV_Reader
             Console.WriteLine("File: " + file);
             if (FileUtils.TestFileHandle(file))
             {
-                OutputResults(FileUtils.ReadFile(file));
+                OutputJSON(FileUtils.ReadFile(file));
             }
             Console.ReadLine();
         }        
@@ -25,18 +25,40 @@ namespace CSV_Reader
             return (target.Length > 0);
         }        
 
-        static void OutputResults(Dictionary<string, string[]> target)
+        static void OutputJSON(Dictionary<string, List<string>> target)
         {
+            string results = "[\n\t{\n\t";
+            /*
+            [
+  {
+    "Alpha": "Apple",
+    "Beta": "Banana",
+    "Gamma": "Grape"
+  },
+  {
+    "Alpha": "Ant",
+    "Beta": "Bat",
+    "Gamma": "Gorilla"
+  }
+]
+ 
+            */
             int wordcount = 0;
-            foreach (KeyValuePair<string, string[]> pair in target)
+            for(int key = 0; key < target.Count; key++)
+            {
+                //Want to iterate through target dictionary to allow for better JSON formatting
+            }
+            foreach (KeyValuePair<string, List<string>> pair in target)
             {
                 wordcount++;
                 string key = pair.Key;
-                string[] value = pair.Value;
+                List<string> value = pair.Value;
+
                 foreach(string val in value)
                 {
-                    Console.WriteLine("Word #" + wordcount + ": " + " key: " + key + " value: " + val);
-                }                
+                    Console.WriteLine("\tWord #" + wordcount + ": " + " key: " + key + " value: " + val);
+                }
+                results += "";
             }
         }
     }
