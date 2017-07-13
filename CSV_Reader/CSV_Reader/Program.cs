@@ -9,22 +9,27 @@ namespace CSV_Reader
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!\n");
-            string file;
-            if (TestForArgs(args))
-            {
-                file = args[args.Length-1];
-                Console.WriteLine("argument length: " + args.Length);               
-            }
-            else
-            {
-                file = GetDefaultFileHandle(); //Used for setting up a default test file, remove if not needed
-            }
+
+            string file = GetReadFile(args);
+            
             Console.WriteLine("File: " + file);
             if (TestFileHandle(file))
             {
                 OutputResults(ReadFile(file));
             }
             Console.ReadLine();
+        }
+
+        static string GetReadFile(string[] args)
+        {
+            if (TestForArgs(args))
+            {
+                return args[args.Length - 1];
+            }
+            else
+            {
+                return GetDefaultFileHandle(); //Used for setting up a default test file, remove if not needed
+            }
         }
 
         static string GetDefaultFileHandle()
@@ -42,29 +47,42 @@ namespace CSV_Reader
             return File.Exists(target);
         }
 
-        static List<string[]> ReadFile(string target)
+        static Dictionary<string, string[]> ReadFile(string target)
         {
             StreamReader reader = new StreamReader(new FileStream(target, FileMode.Open));
             List<string[]> results = new List<string[]>();
-
+            
             while (!reader.EndOfStream)
             {
                 results.Add(reader.ReadLine().Split(','));
             }
-            
-            return results;
+
+            Dictionary<string, string[]> dict = new Dictionary<string, string[]>();
+            string[] keys = results[0];
+            string[] temp = new string[results.Count];
+            for(int i = 1; i < results.Count; i++)
+            {
+                for(int j = 0; j < results[i].Length; j++)
+                {
+                    temp[j] = results[i][j]; //This needs to be adjusted
+                }
+                dict.Add(keys[i-1], temp);
+            }
+            return dict;
         }
 
-        static void OutputResults(List<string[]> target)
+        static void OutputResults(Dictionary<string, string[]> target)
         {
             int wordcount = 0;
-            foreach (string[] str in target)
+            foreach (KeyValuePair<string, string[]> pair in target)
             {
-                foreach (string line in str)
+                wordcount++;
+                string key = pair.Key;
+                string[] value = pair.Value;
+                foreach(string val in value)
                 {
-                    wordcount++;
-                    Console.WriteLine("Word #" + wordcount + ": " + line);
-                }
+                    Console.WriteLine("Word #" + wordcount + ": " + " key: " + key + " value: " + val);
+                }                
             }
         }
     }
