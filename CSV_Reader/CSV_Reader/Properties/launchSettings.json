@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CSV_Reader": {
+      "commandName": "Project",
+      "commandLineArgs": "CSV_Reader C:\\Users\\mnetz\\Desktop\\test.csv"
+    }
+  }
+}
