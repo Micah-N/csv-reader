@@ -6,10 +6,6 @@ namespace CSV_Reader
 {
     public class FileUtils
     {
-        public FileUtils()
-        {
-        }
-
         public static string GetReadFile(string[] args)
         {
             if (Program.TestForArgs(args))
@@ -32,7 +28,7 @@ namespace CSV_Reader
             return File.Exists(target);
         }
 
-        public static Dictionary<string, List<string>> ReadFile(string target)
+        public static Json ReadFile(string target)
         {
             StreamReader reader = new StreamReader(new FileStream(target, FileMode.Open));
             List<string[]> results = new List<string[]>();
@@ -42,15 +38,16 @@ namespace CSV_Reader
                 results.Add(reader.ReadLine().Split(','));
             }
 
-            Dictionary<string, List<string>> dict = new Dictionary<string, List<string>>();
+            Json dict = new Json();
             string[] keys = results[0];
+            dict.Keys = keys;
             List<string>[] values = new List<string>[keys.Length];
             //Initialize values
             for(int i = 0; i < values.Length; i++)
             {
                 values[i] = new List<string>();
             }
-            //CheckFileContents(results);
+            //Get values
             for (int i = 1; i < results.Count; i++)
             {
                 Console.WriteLine(results[i]);
@@ -61,11 +58,13 @@ namespace CSV_Reader
                     values[i - 1].Add(results[i][j]);//This isn't being assigned correctly                    
                 }
             }
+            //Initialize sorted value list
             List<string>[] sortedValues = new List<string>[keys.Length];
             for(int i = 0; i < sortedValues.Length; i++)
             {
                 sortedValues[i] = new List<string>();
             }
+            //Sort values
             for (int k = 0; k < values.Length; k++)
             {
                 for (int l = 0; l < values[k].Count; l++)
@@ -80,21 +79,9 @@ namespace CSV_Reader
                 {
                     Console.WriteLine("Sorted Values#" + k + ", value#" + l + ": " + sortedValues[k][l]);
                 }
-                dict.Add(keys[k], sortedValues[k]);
             }
+            dict.Values = sortedValues;
             return dict;
-        }
-
-        static void CheckFileContents(List<string[]> target)
-        {
-            for (int i = 1; i < target.Count; i++)
-            {
-                Console.WriteLine(target[i]);
-                for (int j = 0; j < target[i].Length; j++)
-                {
-                    Console.WriteLine("Col#" + i + ", value#" + j + ": " + target[i][j]);
-                }
-            }
         }
     }
 }
