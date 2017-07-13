@@ -8,23 +8,28 @@ namespace CSV_Reader
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine();
+            Console.WriteLine("Hello World!\n");
+            string file;
             if (TestForArgs(args))
             {
-                string file = args[args.Length-1];
-                Console.WriteLine("argument length: " + args.Length);
-                Console.WriteLine("File: " + file);
-                if (TestFileHandle(file))
-                {
-                    OutputResults(ReadFile(file));
-                }
+                file = args[args.Length-1];
+                Console.WriteLine("argument length: " + args.Length);               
             }
             else
             {
-                Console.WriteLine("Please enter console arguments.");
+                file = GetDefaultFileHandle(); //Used for setting up a default test file, remove if not needed
+            }
+            Console.WriteLine("File: " + file);
+            if (TestFileHandle(file))
+            {
+                OutputResults(ReadFile(file));
             }
             Console.ReadLine();
+        }
+
+        static string GetDefaultFileHandle()
+        {            
+            return Path.Combine(Directory.GetCurrentDirectory(), "test.csv");
         }
 
         static bool TestForArgs(string[] target)
