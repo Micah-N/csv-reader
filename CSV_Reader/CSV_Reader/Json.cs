@@ -30,7 +30,7 @@ namespace CSV_Reader
  
             */
             int wordcount = 0;
-            /**/
+            /*
             for (int key = 0; key < this.Keys.Length; key++)
             {
                 results += "\n" + tabs + "{";
@@ -44,8 +44,8 @@ namespace CSV_Reader
                 results += "\n" +  tabs + "}";
                 if(key < this.Keys.Length - 1) { results += ","; }
             }
+            */
             /**/
-            /*
             for(int value = 0; value < this.Values.Length - 1; value++)
             {
                 results += "\n" + tabs + "{";
@@ -59,7 +59,7 @@ namespace CSV_Reader
                 results += "\n" + tabs + "}";              
                 if(value < this.Values.Length - 2) { results += ","; }
             }
-            */
+            /**/
             results += "    \n  ]\n}";
             return results;
         }

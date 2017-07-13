@@ -59,7 +59,7 @@ namespace CSV_Reader
                 }
             }
             //Initialize sorted value list
-            List<string>[] sortedValues = new List<string>[results.Count];
+            List<string>[] sortedValues = new List<string>[values.Length];
             for(int i = 0; i < sortedValues.Length; i++)
             {
                 sortedValues[i] = new List<string>();
@@ -70,6 +70,10 @@ namespace CSV_Reader
                 for (int l = 0; l < values[k].Count; l++)
                 {
                     Console.WriteLine("Col#" + k + ", value#" + l + ": " + values[k][l]);
+                    Console.WriteLine(
+                        "sortedValues["+l+"].Count: " + sortedValues[l].Count 
+                        + "\nvalues["+k+"]["+l+"].Length: " + values[k][l].Length
+                        );
                     sortedValues[l].Add(values[k][l]);
                 }
             }
