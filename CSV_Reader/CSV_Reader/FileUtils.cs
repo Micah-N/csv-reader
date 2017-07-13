@@ -41,7 +41,7 @@ namespace CSV_Reader
             Json dict = new Json();
             string[] keys = results[0];
             dict.Keys = keys;
-            List<string>[] values = new List<string>[keys.Length];
+            List<string>[] values = new List<string>[results.Count];
             //Initialize values
             for(int i = 0; i < values.Length; i++)
             {
@@ -59,7 +59,7 @@ namespace CSV_Reader
                 }
             }
             //Initialize sorted value list
-            List<string>[] sortedValues = new List<string>[keys.Length];
+            List<string>[] sortedValues = new List<string>[results.Count];
             for(int i = 0; i < sortedValues.Length; i++)
             {
                 sortedValues[i] = new List<string>();
