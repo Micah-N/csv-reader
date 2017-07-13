@@ -14,6 +14,8 @@ namespace CSV_Reader
             }
             else
             {
+                Console.WriteLine("Wasn't able to retrieve a file from your command line arguments, using a default test.csv");
+                //throw new FileNotFoundException("No file given!"); //Comment this out to use default test.csv file
                 return GetDefaultFileHandle(); //Used for setting up a default test file, remove if not needed
             }
         }
@@ -50,12 +52,9 @@ namespace CSV_Reader
             //Get values
             for (int i = 1; i < results.Count; i++)
             {
-                Console.WriteLine(results[i]);
                 for (int j = 0; j < results[i].Length; j++)
                 {
-                    Console.WriteLine("Col#" + i + ", value#" + j + ": " + results[i][j]);
-                    Console.WriteLine(results[i][j].GetType());
-                    values[i - 1].Add(results[i][j]);//This isn't being assigned correctly                    
+                    values[i - 1].Add(results[i][j]);
                 }
             }
             //Initialize sorted value list
@@ -69,19 +68,7 @@ namespace CSV_Reader
             {
                 for (int l = 0; l < values[k].Count; l++)
                 {
-                    Console.WriteLine("Col#" + k + ", value#" + l + ": " + values[k][l]);
-                    Console.WriteLine(
-                        "sortedValues["+l+"].Count: " + sortedValues[l].Count 
-                        + "\nvalues["+k+"]["+l+"].Length: " + values[k][l].Length
-                        );
                     sortedValues[l].Add(values[k][l]);
-                }
-            }
-            for (int k = 0; k < sortedValues.Length; k++)
-            {
-                for (int l = 0; l < sortedValues[k].Count; l++)
-                {
-                    Console.WriteLine("Sorted Values#" + k + ", value#" + l + ": " + sortedValues[k][l]);
                 }
             }
             dict.Values = sortedValues;

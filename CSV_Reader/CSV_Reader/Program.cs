@@ -9,13 +9,23 @@ namespace CSV_Reader
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!\n");
-
-            string file = FileUtils.GetReadFile(args);
+            string file = null;
+            try { file = FileUtils.GetReadFile(args); }
+            catch(FileNotFoundException caught)
+            {
+                Console.WriteLine("\n**Caught an exception with the following details:**\n" + caught.ToString());
+                Environment.Exit(-1);
+            }
             
             Console.WriteLine("File: " + file);
             if (FileUtils.TestFileHandle(file))
             {
-                OutputJSON(FileUtils.ReadFile(file));
+                try { OutputJSON(FileUtils.ReadFile(file)); }
+                catch (IndexOutOfRangeException caught)
+                {
+                    Console.WriteLine("\n**Caught an exception with the following details:**\n" + caught.ToString());
+                    Environment.Exit(-1);
+                }     
             }
             Console.ReadLine();
         }        

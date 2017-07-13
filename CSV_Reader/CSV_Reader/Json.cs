@@ -12,55 +12,22 @@ namespace CSV_Reader
         override
         public string ToString()
         {
-            string tabs = "    "; //string holds four tabs for cleaner formatting
-            string results = "{\n  [    ";
-            /*
-            [
-  {
-    "Alpha": "Apple",
-    "Beta": "Banana",
-    "Gamma": "Grape"
-  },
-  {
-    "Alpha": "Ant",
-    "Beta": "Bat",
-    "Gamma": "Gorilla"
-  }
-]
- 
-            */
-            int wordcount = 0;
-            /*
-            for (int key = 0; key < this.Keys.Length; key++)
-            {
-                results += "\n" + tabs + "{";
-                //Want to iterate through target dictionary to allow for better JSON formatting
-                for(int value = 0; value < this.Values[key].Count; value++)
-                {
-                    string val = this.Values[key][value];
-                    results += "\n" + tabs + tabs + '"' + this.Keys[key].Trim() + '"' + ": " + '"' + val.Trim() + '"';
-                    if (value < this.Values[key].Count - 1) { results += ","; }
-                }
-                results += "\n" +  tabs + "}";
-                if(key < this.Keys.Length - 1) { results += ","; }
-            }
-            */
-            /**/
+            string spaces = "    "; //string holds four spaces for cleaner formatting (looks better than "\t")
+            string results = "{\n  [";
+            
             for(int value = 0; value < this.Values.Length - 1; value++)
             {
-                results += "\n" + tabs + "{";
+                results += "\n" + spaces + "{";
                 for (int key = 0; key < this.Keys.Length; key++)
                 {
                     string val = this.Values[key][value];
-                    results += "\n" + tabs + tabs + '"' + this.Keys[key].Trim() + '"' + ": " + '"' + val.Trim() + '"';
-                    //if (value < this.Values[key].Count - 1) { results += ","; }
+                    results += "\n" + spaces + spaces + '"' + this.Keys[key].Trim() + '"' + ": " + '"' + val.Trim() + '"';
                     if(key < this.Keys.Length - 1) { results += ","; }
                 }
-                results += "\n" + tabs + "}";              
+                results += "\n" + spaces + "}";              
                 if(value < this.Values.Length - 2) { results += ","; }
             }
-            /**/
-            results += "    \n  ]\n}";
+            results += "\n  ]\n}";
             return results;
         }
     }
