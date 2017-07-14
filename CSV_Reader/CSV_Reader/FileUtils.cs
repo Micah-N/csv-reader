@@ -40,15 +40,12 @@ namespace CSV_Reader
                 results.Add(reader.ReadLine().Split(','));
             }
 
-            Json dict = new Json();
             string[] keys = results[0];
-            dict.Keys = keys;
+
+            //Initialize values list
             List<string>[] values = new List<string>[results.Count - 1];
-            //Initialize values
-            for(int i = 0; i < values.Length; i++)
-            {
-                values[i] = new List<string>();
-            }
+            InitListArray(values);
+
             //Get values
             for (int i = 1; i < results.Count; i++)
             {
@@ -59,10 +56,8 @@ namespace CSV_Reader
             }
             //Initialize sorted value list
             List<string>[] sortedValues = new List<string>[keys.Length];
-            for(int i = 0; i < sortedValues.Length; i++)
-            {
-                sortedValues[i] = new List<string>();
-            }
+            InitListArray(sortedValues);
+            
             //Sort values
             for (int k = 0; k < values.Length; k++)
             {
@@ -71,8 +66,12 @@ namespace CSV_Reader
                     sortedValues[l].Add(values[k][l]);
                 }
             }
-            dict.Values = sortedValues;
-            return dict;
+            return new Json() { Keys = keys, Values = sortedValues };
+        }
+
+        public static void InitListArray(List<string>[] target)
+        {
+            for(int i = 0; i < target.Length; i++) { target[i] = new List<string>(); }
         }
     }
 }
