@@ -46,26 +46,23 @@ namespace CSV_Reader
             List<string>[] values = new List<string>[results.Count - 1];
             InitListArray(values);
 
-            //Get values
-            for (int i = 1; i < results.Count; i++)
-            {
-                for (int j = 0; j < results[i].Length; j++)
-                {
-                    values[i - 1].Add(results[i][j]);
-                }
-            }
             //Initialize sorted value list
             List<string>[] sortedValues = new List<string>[keys.Length];
             InitListArray(sortedValues);
-            
-            //Sort values
-            for (int k = 0; k < values.Length; k++)
+
+            //Get values
+            for (int i = 0; i < results.Count - 1; i++)
             {
-                for (int l = 0; l < values[k].Count; l++)
+                for (int j = 0; j < results[i].Length; j++)
                 {
-                    sortedValues[l].Add(values[k][l]);
+                    values[i].Add(results[i + 1][j]);
+                }
+                for (int l = 0; l < values[i].Count; l++)
+                {
+                    sortedValues[l].Add(values[i][l]);
                 }
             }
+            
             return new Json() { Keys = keys, Values = sortedValues };
         }
 

@@ -15,8 +15,6 @@ namespace CSV_Reader
                 Console.WriteLine("\n**Caught an exception with the following details:**\n" + caught.ToString());
                 Environment.Exit(-1);
             }
-            
-            Console.WriteLine("File: " + file);
             if (FileUtils.TestFileHandle(file))
             {
                 try { OutputJSON(FileUtils.ReadFile(file)); }
