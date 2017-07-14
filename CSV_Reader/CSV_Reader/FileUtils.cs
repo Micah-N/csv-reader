@@ -8,10 +8,7 @@ namespace CSV_Reader
     {
         public static string GetReadFile(string[] args)
         {
-            if (Program.TestForArgs(args))
-            {
-                return args[args.Length - 1];
-            }
+            if ((args.Length > 0)) { return args[args.Length - 1]; } //If there's at least one argument provided
             else
             {
                 Console.WriteLine("Wasn't able to retrieve a file from your command line arguments, using a default test.csv");
@@ -65,7 +62,7 @@ namespace CSV_Reader
 
         public static void InitListArray(List<string>[] target)
         {
-            for(int i = 0; i < target.Length; i++) { target[i] = new List<string>(); }
+            for (int i = 0; i < target.Length; i++) { target[i] = new List<string>(); }
         }
     }
 }

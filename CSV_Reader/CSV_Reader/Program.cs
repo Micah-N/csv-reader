@@ -24,16 +24,11 @@ namespace CSV_Reader
                     Environment.Exit(-1);
                 }     
             }
-        }        
-
-        public static bool TestForArgs(string[] target)
-        {
-            return (target.Length > 0);
-        }        
+        }   
 
         static void OutputJSON(Json target)
         {
-            Console.WriteLine("Output results: \n" + target.ToString());            
+            Console.WriteLine("Output results: \n" + target.ToString());
         }
     }
 }
