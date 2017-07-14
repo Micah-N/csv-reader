@@ -46,7 +46,7 @@ namespace CSV_Reader
             List<string>[] values = new List<string>[results.Count - 1];
             InitListArray(values);
 
-            //Initialize sorted value list
+            //Initialize sorted values list
             List<string>[] sortedValues = new List<string>[keys.Length];
             InitListArray(sortedValues);
 
@@ -56,10 +56,7 @@ namespace CSV_Reader
                 for (int j = 0; j < results[i].Length; j++)
                 {
                     values[i].Add(results[i + 1][j]);
-                }
-                for (int l = 0; l < values[i].Count; l++)
-                {
-                    sortedValues[l].Add(values[i][l]);
+                    sortedValues[j].Add(values[i][j]);
                 }
             }
             
