@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CSV_Reader
 {
@@ -14,7 +12,6 @@ namespace CSV_Reader
         {
             string spaces = "    "; //string holds four spaces for cleaner formatting (looks better than "\t")
             string results = "{\n  [";
-            /**/
             for(int value = 0; value < this.Values[0].Count; value++)
             {
                 results += "\n" + spaces + "{";
@@ -27,19 +24,6 @@ namespace CSV_Reader
                 results += "\n" + spaces + "}";              
                 if(value < this.Values[0].Count - 1) { results += ","; }
             }
-            /**/
-            /*
-            for(int key = 0; key < this.Keys.Length; key++)
-            {
-                results += "\n" + spaces + "{";
-                foreach (string val in this.Values[key])
-                {
-                    results += "\n" + spaces + spaces + '"' + this.Keys[key].Trim() + '"' + ": " + '"' + val.Trim() + '"';
-                    if (key < this.Keys.Length - 1) { results += ","; }
-                }
-                results += "\n" + spaces + "}";
-            }
-            */
             results += "\n  ]\n}";
             return results;
         }

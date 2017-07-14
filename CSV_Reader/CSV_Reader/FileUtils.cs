@@ -70,12 +70,6 @@ namespace CSV_Reader
                 {
                     sortedValues[l].Add(values[k][l]);
                 }
-                /*
-                foreach(string val in values[k])
-                {
-                    sortedValues[k].Add(val);
-                }
-                */
             }
             dict.Values = sortedValues;
             return dict;
