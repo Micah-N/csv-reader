@@ -26,7 +26,6 @@ namespace CSV_Reader
                     Environment.Exit(-1);
                 }     
             }
-            Console.ReadLine();
         }        
 
         public static bool TestForArgs(string[] target)
