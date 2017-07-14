@@ -7,7 +7,7 @@ namespace CSV_Reader
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!\n");
+            Console.WriteLine("Running CSV -> JSON program\n");
             string file = null;
             try { file = FileUtils.GetReadFile(args); }
             catch(FileNotFoundException caught)
