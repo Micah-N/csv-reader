@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace CSV_Reader
 {
@@ -8,13 +9,14 @@ namespace CSV_Reader
     {
         public static string GetReadFile(string[] args)
         {
-            if ((args.Length > 0)) { return args[args.Length - 1]; } //If there's at least one argument provided
-            else
+            if (args.Length == 1)
             {
-                Console.WriteLine("Wasn't able to retrieve a file from your command line arguments, using a default test.csv");
-                //throw new FileNotFoundException("No file given!"); //Comment this out to use default test.csv file
-                return GetDefaultFileHandle(); //Used for setting up a default test file, remove if not needed
+                return args.Single();
             }
+            
+            Console.WriteLine("Wasn't able to retrieve a file from your command line arguments, using a default test.csv");
+            //throw new FileNotFoundException("No file given!"); //Comment this out to use default test.csv file
+            return GetDefaultFileHandle(); //Used for setting up a default test file, remove if not needed
         }
 
         public static string GetDefaultFileHandle()
@@ -57,7 +59,17 @@ namespace CSV_Reader
                 }
             }
             
-            return new Json() { Keys = keys, Values = sortedValues };
+            return new Json()
+            {
+                Keys = keys,
+                Values = sortedValues
+            };
+        }
+
+        public static List<string>[] CreateListArray(int size) {
+            return Enumerable.Range(0, size)
+                .Select(index => new List<string>())
+                .ToArray();
         }
 
         public static void InitListArray(List<string>[] target)
