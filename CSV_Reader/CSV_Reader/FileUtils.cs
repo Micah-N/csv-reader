@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
-namespace CSV_Reader
+namespace CSVReader
 {
     public class FileUtils
     {
-        public static string GetReadFile(string[] args)
-        {
-            if ((args.Length > 0)) { return args[args.Length - 1]; } //If there's at least one argument provided
-            else
-            {
-                Console.WriteLine("Wasn't able to retrieve a file from your command line arguments, using a default test.csv");
-                //throw new FileNotFoundException("No file given!"); //Comment this out to use default test.csv file
-                return GetDefaultFileHandle(); //Used for setting up a default test file, remove if not needed
-            }
-        }
-
         public static string GetDefaultFileHandle()
         {
             return Path.Combine(Directory.GetCurrentDirectory(), "test.csv");
@@ -40,12 +29,10 @@ namespace CSV_Reader
             string[] keys = results[0];
 
             //Initialize values list
-            List<string>[] values = new List<string>[results.Count - 1];
-            InitListArray(values);
+            List<string>[] values = CreateListArray(results.Count - 1);
 
             //Initialize sorted values list
-            List<string>[] sortedValues = new List<string>[keys.Length];
-            InitListArray(sortedValues);
+            List<string>[] sortedValues = CreateListArray(keys.Length);
 
             //Get values
             for (int i = 0; i < results.Count - 1; i++)
@@ -57,12 +44,18 @@ namespace CSV_Reader
                 }
             }
             
-            return new Json() { Keys = keys, Values = sortedValues };
+            return new Json()
+            {
+                Keys = keys,
+                Values = sortedValues
+            };
         }
 
-        public static void InitListArray(List<string>[] target)
+        public static List<string>[] CreateListArray(int size)
         {
-            for (int i = 0; i < target.Length; i++) { target[i] = new List<string>(); }
+            return Enumerable.Range(0, size)
+                .Select(index => new List<string>())
+                .ToArray();
         }
     }
 }
