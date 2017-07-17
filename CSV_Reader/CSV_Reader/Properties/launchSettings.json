@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "CSV_Reader": {
+    "CSVReader": {
       "commandName": "Project"
     }
   }
